@@ -1,2 +1,2 @@
 # zhoufwind.github.io
-Blog for Stephen
+A website for Stephen
