@@ -19,10 +19,10 @@ social-linkedin: stephen-zhou-a8999442 # add your Linkedin handle
 social-email: # add your Email address
 
 # Disqus
-discus-identifier: mr-brown # add your discus identifier
+discus-identifier: zhoufwind # add your discus identifier
 
 # Tracker
-analytics: # Google Analytics
+analytics: UA-121576238-1 # Google Analytics
 
 # Build Settings
 markdown: kramdown
