@@ -1,8 +1,12 @@
 ---
 layout: post
-title: JumpServer故障排查实例
+title: "JumpServer故障排查实例"
+subtitle: "源码分析迁移JumpServer后产生故障"
 date: 2018-06-28 22:29:00 +0800
-img: 15301714176412.png
+author: "周峰"
+header-img: "img/in-post/jumpsrv-ex.png"
+header-mask: 0.3
+catalog: true
 tags:
   - 运维
   - JumpServer
