@@ -3,7 +3,7 @@ layout: post
 title: "Git Tutorial"
 subtitle: "Git Tutorial for Beginners: Command-Line Fundamentals"
 date: 2018-06-30 12:51:00 +0800
-catalog: ture
+catalog: true
 tags:
     - 运维
     - 开发
@@ -96,8 +96,6 @@ $ git clone ../remote_repo.git .
 $ git clone https://github.com/zhoufwind/Hello-World.git .
 ```
 
-[1]:
-https://www.youtube.com/watch?v=HVsySz-h9r4
+[1]: https://www.youtube.com/watch?v=HVsySz-h9r4 "Git Tutorial for Beginners: Command-Line Fundamentals"
 
-[2]:
-https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g
+[2]: https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g "Corey Schafer"

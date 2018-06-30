@@ -5,7 +5,7 @@ subtitle: 在进行网站开发时，遇到大并发场景下，若想提升服�
 date: 2018-06-28 00:40:00 +0800
 header-img: "img/in-post/post-exp-than-get.png"
 header-mask: 0.3
-catalog: ture
+catalog: true
 tags:
     - 运维
     - CDN

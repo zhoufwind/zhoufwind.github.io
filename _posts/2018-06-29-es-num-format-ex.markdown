@@ -3,7 +3,7 @@ layout: post
 title: "修复数据格式冲突导致ES索引失败的问题"
 subtitle: "曲线救国，统一不了那就干脆删了吧！"
 date: 2018-06-29 11:46:00 +0800
-catalog: ture
+catalog: true
 tags:
     - 运维
     - ELK
