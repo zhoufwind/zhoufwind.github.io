@@ -5,7 +5,6 @@ subtitle: "Git Tutorial for Beginners: Command-Line Fundamentals"
 date: 2018-06-30 12:51:00 +0800
 catalog: true
 tags:
-    - 运维
     - 开发
     - Git
 ---
@@ -93,10 +92,78 @@ $ git clone ../remote_repo.git .
 $ git clone https://github.com/zhoufwind/Hello-World.git .
 ```
 
-To be continue...
+#### Viewing information about the remote repository
+```
+$ git remote -v
+$ git branch -a
+```
+
+#### Pushing changes
+```
+$ git diff
+$ git status
+$ git add .
+$ git commit -m "Make a change"
+
+$ git pull origin master
+$ git push origin master
+```
+
+### Common workflow
+
+#### Create a branch for desired feature
+```
+$ git branch hello-divide
+
+$ git branch
+  hello-divide
+* master
+
+$ git checkout hello-divide
+Switched to branch 'hello-divide'
+
+$ git branch
+* hello-divide
+  master
+
+$ cp ~/Temp/hello.sh .
+$ git status
+$ git add -A
+$ git commit -m "Adding demo script"
+```
+
+#### After commit push branch to remote
+```
+$ git push -u origin hello-divide
+$ git branch -a
+```
+
+#### Merge a branch
+```
+$ git checkout master
+
+$ git pull origin master
+
+$ git branch --merged
+
+$ git merge hello-divide
+
+$ git push origin master
+```
+
+#### Deleting a branch
+```
+$ git branch --merged
+
+$ git branch -d hello-divide
+
+$ git branch -a
+
+$ git push origin --delete hello-divide
+```
 
 ### Reference
-Git tutorial from [YouTube][1] by [Corey Schafer][2].
+Git tutorial published at [YouTube][1] by [Corey Schafer][2] on Aug 3, 2015.
 
 [1]: https://www.youtube.com/watch?v=HVsySz-h9r4 "Git Tutorial for Beginners: Command-Line Fundamentals"
 
