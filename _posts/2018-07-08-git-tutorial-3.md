@@ -8,11 +8,11 @@ tags:
     - 开发
     - Git
 ---
-# USING STASH FUNCTION
+## USING STASH FUNCTION
 
-## BASIC USAGE
+### BASIC USAGE
 
-### Stash the change
+#### Stash the change
 ```
 $ echo "May the force be with you!" >> abc.txt
 $ git diff
@@ -20,12 +20,12 @@ $ git stash save "Let's stash this change"
 $ git diff
 ```
 
-### Check the stash status
+#### Check the stash status
 ```
 $ git stash list
 ```
 
-### How to apply the stash?
+#### How to apply the stash?
 1. Using apply command, make change back to file, but stash still there:
 ```
 # Most recently change is 0, others +1
@@ -39,7 +39,7 @@ $ git checkout -- .
 $ git stash pop
 ```
 
-### Remove the stash
+#### Remove the stash
 1. Remove speicify stash:
 ```
 $ git stash drop stash@{0}
@@ -49,7 +49,7 @@ $ git stash drop stash@{0}
 $ git stash clear
 ```
 
-## USING STASH TO CHANGE BRANCH
+### USING STASH TO CHANGE BRANCH
 
 ```
 $ git checkout master
@@ -64,7 +64,7 @@ $ git add .
 $ git commit -m "Make changes on feature branch"
 ```
 
-### Reference
+## Reference
 Git tutorial published at [YouTube][1] by [Corey Schafer][2] on Apr 17, 2015.
 
 [1]: https://www.youtube.com/watch?v=KLEDKgMmbBI "Git Tutorial: Using the Stash Command"
