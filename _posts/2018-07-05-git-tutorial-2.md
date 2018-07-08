@@ -13,7 +13,7 @@ tags:
 ### Fixing mistakes before `add`
 
 ```
-$ echo 'BALABALABA' >> abc.txt
+$ touch abc.txt
 $ git status
 $ git diff
 $ git checkout abc.txt
@@ -63,7 +63,7 @@ Three different type of resets:
 - git reset --hard
 
 #### soft reset - staged changes after reset
-Reset back to the commit we specifid, but will keep our changes that we've made in the staging directory(AFTER ADD).
+Reset back to the commit we specifid, but will keep our changes that we've made in the staging directory(after `git add` and `git commit`).
 > Changes to be committed
 
 ```
@@ -78,7 +78,7 @@ $ git status
 ```
 
 #### mixed reset - Unstaged changes after reset
-Reset back to the commit we specifid, keep the changes, however, the changes in stating area, in the working directory.
+Reset back to the commit we specifid, keep the changes, however, the changes in stating area, in the working directory(before `git add` and `git commit`).
 > Changes not staged for commit
 > Untracked files
 
@@ -138,4 +138,4 @@ Git tutorial published at [YouTube][1] by [Corey Schafer][2] on Oct 26, 2015.
 
 [1]: https://www.youtube.com/watch?v=FdZecVxzJbk "Git Tutorial: Fixing Common Mistakes and Undoing Bad Commits"
 
-[2]: https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g "Corey Schafer"
+[2]: http://coreyms.com/ "Corey Schafer"
