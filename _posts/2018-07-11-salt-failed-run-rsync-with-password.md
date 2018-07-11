@@ -15,8 +15,10 @@ Rsync非加密传输方式不安全，需要加密传输。
 ### 问题
 加密传输后的rsync命令需要添加 `--password-file` 参数，本机执行没有问题，但通过salt调用失败，提示权限验证失败：
 
-> @ERROR: auth failed on module test
-> rsync error: error starting client-server protocol (code 5) at main.c(1648) [Receiver=3.1.2]
+```
+@ERROR: auth failed on module test
+rsync error: error starting client-server protocol (code 5) at main.c(1648) [Receiver=3.1.2]
+```
 
 ### 缓解
 深入研究后，了解rsync加密时读取密码内容的方式：
@@ -29,6 +31,8 @@ Rsync非加密传输方式不安全，需要加密传输。
 - Github: #[48517][2]
 
 但后面仔细想了想，rsync和salt本身应该都没有问题，排查可能的问题后，只剩下环境变量的坑了。
+
+果然，最后单独用salt状态模块 `salt.states.environ` 定义环境变量 `USER` 和 `RSYNC_PASSWORD` 后，问题得到缓解。
 
 ### 后记
 虽然当前基本功能可用，但还有个很严重的问题，salt文档上说，环境变量只对当前进程有效，若真是如此，salt-minion进程挂掉后，必须再对环境变量进行赋值，否则又将失败。
