@@ -10,7 +10,7 @@ tags:
     - TCP/IP
 ---
 ### 背景
-距离上次更新已经过去的大半周了，这大半周时间主要用来填上周遇到的一个坑，没错，就是上篇博文最后提到的那个线上故障。
+距离上次更新已经过去了大半周，这大半周时间主要用来填上周遇到的一个坑，没错，就是上篇博文最后提到的那个线上故障。
 
 当天晚上并未查明具体问题原因，第二天白天，出现异常问题程序（暂称：程序A）的开发同学终于醒了……（当天晚上睡着了，电话死活没打通），后排查发现是调用salt-api异常，微信群里反馈连接salt有问题。
 
@@ -68,7 +68,7 @@ ChannelFailures: IOError("Port 443 not free on '0.0.0.0'",)
 
 看到这个报错，感觉像是443端口分配失败的样子，`ps -ef|grep salt-api`看了下进程状态，糟，确实有问题，老的salt-api父进程没了，子进程还在，怪不得新的进程跑不起来了：
 ```
-$ grep 'salt-api' downproc.log 
+# ps -ef|grep salt-api|grep -v grep
 root     12603     1  0 09:25 ?        00:00:00 /usr/bin/python2.6 /usr/bin/salt-api -d --log-file=/var/log/salt/api --log-level=debug ProcessManager
 root     16825 12603  1 09:32 ?        00:00:00 /usr/bin/python2.6 /usr/bin/salt-api -d --log-file=/var/log/salt/api --log-level=debug ProcessManager
 root     17502     1 99 Jul12 ?        2-04:45:42 /usr/bin/python2.6 /usr/bin/salt-api -d --log-file=/var/log/salt/api --log-level=debug
