@@ -4,7 +4,7 @@ SEOTitle: 周峰的博客 | Mr.Zhou Blog
 header-img: img/home-bg.jpg
 email: zhoufwind@hotmail.com
 description: "运维背锅侠 | 周峰，System Engineer, DevOps, SRE | 这里是 @zhoufwind 周峰 的个人博客。"
-keyword: "周峰, zhoufwind, @zhoufwind, 周峰的博客, Mr.Zhou Blog, 博客, 个人网站, 互联网, Web, DevOps, 运维, SRE"
+keyword: "周峰, zhoufwind, @zhoufwind, 周峰的博客, Mr.Zhou Blog, 博客, 个人网站, 互联网, 运维, DevOps, SRE"
 url: "https://stephenzhou.net"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -67,7 +67,7 @@ ga_domain: stephenzhou.net
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做运维，<br>离开世界之前，一切都是过程"
+sidebar-about-description: "人生苦短，贵在运维。"
 sidebar-avatar: /img/avatar-hedgehog.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
