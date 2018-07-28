@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "DNS别老配8.8.8.8，坑着呢！"
-subtitle: "谷歌DNS问题排查记录"
+title: "谷歌DNS问题排查记录"
+subtitle: "DNS别老配8.8.8.8，坑着呢！"
 date: 2018-07-28 10:44PM
 catalog: true
 tags:
