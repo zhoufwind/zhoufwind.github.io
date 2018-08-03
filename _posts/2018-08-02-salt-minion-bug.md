@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "记salt-minion升级后发现的两个BUG"
+title: "记salt-minion升级后发现的两个幺蛾子"
 subtitle: "salt-minion SALT.STATES.ARCHIVE模块调整及重启salt-minion会kill其他进程问题"
 date: 2018-08-02 05:02PM
 catalog: true
@@ -9,9 +9,9 @@ tags:
     - Salt
 ---
 ### 背景
-升级背景在前文中也有提到，salt-master升级，salt-minion跟着一起升，非必要。
+背景在前文中也有提到，salt-master升级，salt-minion跟着一起升，理论上非必要。
 
-但在本次升级过程中发现的两个问题，发现升级salt-minion又变得是十分必要的了，具体原因详见以下问题：
+但在本次升级过程中发现的两个问题，发现升级salt-minion又变得十分必要了，具体原因详见以下问题：
 
 ### 问题
 
@@ -45,7 +45,7 @@ tags:
 
 产线服务器上测了一把，可以重现，并且确定误杀的进程都是在`salt-minion.service`这个主进程下的。
 
-如下，`python /home/scripts/server_load_ctrl.py start`该进程是通过salt启动的，重启salt-minion服务后，该python进程也消失了：
+如下，`/home/scripts/server_load_ctrl.py`此进程是通过salt启动的，重启salt-minion服务后，该python进程也一起消失了：
 
 ```
 # systemctl status salt-minion.service 
@@ -59,7 +59,9 @@ tags:
            ├─1287 /usr/bin/python /usr/bin/salt-minion
            ├─1490 /usr/bin/python /usr/bin/salt-minion
            └─7094 python /home/scripts/server_load_ctrl.py start
+
 # systemctl restart salt-minion.service 
+
 # systemctl status salt-minion.service 
 ● salt-minion.service - The Salt Minion
    Loaded: loaded (/usr/lib/systemd/system/salt-minion.service; enabled; vendor preset: disabled)
@@ -72,9 +74,9 @@ tags:
            └─28906 /usr/bin/python /usr/bin/salt-minion
 ```
 
-可以发现，原pid为7094的python进程一同被kill掉了。重启salt-minion后，salt-minion有，但python进程没了。
+可以发现，原pid为`7094`的python进程一同被kill掉了。重启salt-minion后，salt-minion出现，但python进程没了。
 
-谷歌上搜搜了下关键字`salt LimitNOFILE`，发现已经有人遇到类似问题了：《重启salt-minion会连同kill其他进程》[链接戳我][3]，其中引用了官方的issue#[22993][4]。
+谷歌上搜搜了下关键字`salt LimitNOFILE`，发现已经有人遇到类似问题了：《重启salt-minion会连同kill其他进程》[链接戳我][3]，其中引用了官方的issue#[22993][4]，指出对salt-minion启动脚本进行了调整。
 
 以下为原salt-minion启动脚本：
 
@@ -112,16 +114,18 @@ ExecStart=/usr/bin/salt-minion
 WantedBy=multi-user.target
 ```
 
-我们发现，`Service`这项在原来的文件上多了两个参数：`KillMode=process`及`LimitNOFILE=8192`，这两项都保证了只停止主进程。
+我们发现，`Service`这项在原来的文件上多了两个参数：`KillMode=process`及`LimitNOFILE=8192`，这两项都保证了只停止主进程，而不影响其他进程。
 
 网上搜了下`KillMode`相关文章，以下这篇文章《Systemd 入门教程：实战篇》[链接戳我][5]，做了比较详细的解释：
 
 ![img](/img/in-post/post-salt-minion-bug/systemd-killmode.png)
 
-更新salt-minion版本后，发现问题确实已修复，重启salt-minion后，python及java服务都正常运行：
+更新salt-minion版本后，发现问题确实已得到修复，在重启salt-minion后，python及java服务都正常运行：
 
+重启前`salt-minion.service`状态：
 ![img](/img/in-post/post-salt-minion-bug/systemctl-restart-1.png)
 
+重启后`salt-minion.service`状态：
 ![img](/img/in-post/post-salt-minion-bug/systemctl-restart-2.png)
 
 ### 后记
