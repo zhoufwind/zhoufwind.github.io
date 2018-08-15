@@ -10,9 +10,9 @@ tags:
     - Rsync
 ---
 
-### 背景
+### 前言
 
-上文[《salt执行带密码参数的rsync命令失败》][1]中提到，rsync使用加密方式同步文件，并且用salt执行命令行，必须将密码配到salt的环境变量中，我们后面的策略是在同步代码前，先执行一遍同步环境变量的命令，具体如下：
+上文[《salt执行带密码参数的rsync命令失败》][1]中提到，rsync使用加密方式同步文件，并且用salt执行命令行，必须将密码配到salt的环境变量中，我们后面的策略是在同步代码前，先执行一遍同步环境变量的命令，具体执行步骤如下：
 
 ```
 # cat /path/to/salt/set_rsync_env.sls 
@@ -25,9 +25,42 @@ environment_variables:
         RSYNC_PASSWORD: "xxx"
 
 # salt <target> state.apply /path/to/salt/set_rsync_env
+<target>:
+----------
+          ID: environment_variables
+    Function: environ.setenv
+        Name: rsync
+      Result: True
+     Comment: Environ values were set
+     Started: 15:31:09.216990
+    Duration: 49.057 ms
+     Changes:   
+              ----------
+              RSYNC_PASSWORD:
+                  xxx
+              USER:
+                  root
+
+Summary for <target>
+------------
+Succeeded: 1 (changed=1)
+Failed:    0
+------------
+Total states run:     1
+Total run time:  49.057 ms
+
+# salt <target> environ.item '[USER, RSYNC_PASSWORD]'
+<target>:
+    ----------
+    RSYNC_PASSWORD:
+        xxx
+    USER:
+        root
 ```
 
 以上方式能够解决rsync加密同步文件的问题。
+
+### 背景
 
 今天突然接用户反馈，rsync同步文件时出现异常，提示rsync auth验证失败，截图如下：
 
