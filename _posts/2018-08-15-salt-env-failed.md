@@ -39,7 +39,7 @@ environment_variables:
 
 ```
 # salt <target> environ.item '[USER, RSYNC_PASSWORD]' -l quiet
-192.168.36.149:
+<target>:
     ----------
     RSYNC_PASSWORD:
     USER:
@@ -64,9 +64,9 @@ ERROR: Minions returned with non-zero exit code
 这时想到配置salt环境变量有两种方式，一种是我们已经用的`state.apply`这种状态文件方式，还有一种命令行`environ.setenv`这种方式直传，试了下，可行：
 
 ```
-# salt 192.168.36.149 environ.setenv '{USER: "root", RSYNC_PASSWORD: "xxx"}' update_minion=True
-# salt 192.168.36.149 environ.item '[USER, RSYNC_PASSWORD]' -l quiet
-192.168.36.149:
+# salt <target> environ.setenv '{USER: "root", RSYNC_PASSWORD: "xxx"}' update_minion=True
+# salt <target> environ.item '[USER, RSYNC_PASSWORD]' -l quiet
+<target>:
     ----------
     RSYNC_PASSWORD:
         xxx
