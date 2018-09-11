@@ -28,7 +28,7 @@ tags:
 
 咱们先来写一下框架代码，具体各部分代码再一步一步的实现。
 
-```go
+```
 package main
 
 type SSLProcess struct {
@@ -65,7 +65,7 @@ func main() {
 
 具体的代码：
 
-```go
+```
 func (self *SSLProcess) Read() {
 	//读取模块
 	for _, v := range self.txtLines {
@@ -86,7 +86,7 @@ func (self *SSLProcess) Read() {
 
 具体的代码：
 
-```go
+```
 func (self *SSLProcess) Process() {
 	//获取证书时间的模块
 	for v := range self.rc { //等待rc中有数据，并开始获取证书信息
@@ -107,7 +107,7 @@ func (self *SSLProcess) Process() {
 
 具体的代码：
 
-```go
+```
 func (self *SSLProcess) WriteOut() {
 	//结果写出模块
 	for v := range self.wc { //等待wc中有数据，并打印出来
@@ -138,7 +138,7 @@ www.cctalk.com cctalk.com
 
 main函数和文件读取模块代码
 
-```go
+```
 func (self *SSLProcess) ReadFromFile(filename string) {
 	txtBytes, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -188,7 +188,7 @@ func main() {
 
 最后附上main完整的代码：
 
-```go
+```
 // sslcheck project main.go
 package main
 
