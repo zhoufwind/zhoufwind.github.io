@@ -7,7 +7,7 @@ catalog: true
 tags:
     - 运维
     - SNI
-    - HTTPS
+    - SSL
     - CDN
 ---
 ### 背景

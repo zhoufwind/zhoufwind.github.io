@@ -2,10 +2,10 @@
 layout: post
 title: "GO语言高并发模式在监控的使用"
 date: 2018-09-11 03:01PM
+author: "刘同升"
 catalog: true
 tags:
     - 运维
-    - HTTPS
     - SSL
 ---
 
