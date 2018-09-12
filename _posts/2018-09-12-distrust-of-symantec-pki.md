@@ -70,9 +70,17 @@ Console提示信息如下：
 
 谷歌这么做，虽然对各网站运营人员来说有些折腾，但其初衷却是好的，无非是想维护一个健康的互联网环境。在这个大前提下，跟着一起折腾几下也无可厚非。
 
-随手搜了下，发现也有几家大厂面临同样问题，是时候更新了！
+随手搜了下，发现有类似问题的也不少，朋友，是时候更新了！
 
-![img](/img/in-post/post-180912-distrust-of-symantec-pki/WechatIMG2103.png)
+```
+# 网易
+The SSL certificate used to load resources from https://push.mail.126.com will be distrusted in M70. Once distrusted, users will be prevented from loading these resources. See https://g.co/chrome/symantecpkicerts for more information.
+The SSL certificate used to load resources from https://ir.mail.126.com will be distrusted in M70. Once distrusted, users will be prevented from loading these resources. See https://g.co/chrome/symantecpkicerts for more information.
+The SSL certificate used to load resources from https://img1.126.net will be distrusted in M70. Once distrusted, users will be prevented from loading these resources. See https://g.co/chrome/symantecpkicerts for more information.
+
+# 思科
+The SSL certificate used to load resources from https://www.static-cisco.com will be distrusted in M70. Once distrusted, users will be prevented from loading these resources. See https://g.co/chrome/symantecpkicerts for more information.
+```
 
 [1]: https://www.chromium.org/Home/chromium-security/root-ca-policy "Root Certificate Policy"
 [2]: https://security.googleblog.com/2015/10/sustaining-digital-certificate-security.html "Sustaining Digital Certificate Security"
