@@ -1,7 +1,7 @@
 ---
 layout: post
-title: ""
-subtitle: ""
+title: "bash warning setlocale LC_ALL cannot change locale问题解决记录"
+subtitle: "locale/yum/rpm填坑记录"
 date: 2018-09-19 10:17AM
 catalog: true
 tags:
