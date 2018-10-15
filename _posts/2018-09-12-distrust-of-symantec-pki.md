@@ -36,13 +36,13 @@ Console提示信息如下：
 
 #### Chrome 66
 
-自2018年10月16日Chrome 70版本发布后，仍未更新赛门铁克新PKI系统签发证书的话，用户继续使用Chrome访问这些站点便会出现证书错误提示：
+自2018年4月17日Chrome 66版本发布后，Chrmoe不再信任2016.6.1以前的证书，浏览器会直接提示证书异常错误。
 
 #### Chrome 70
 
-自2018年4月17日Chrome 66版本发布后，Chrmoe不再信任2016.6.1以前的证书，浏览器会直接提示证书异常错误：
+自2018年10月16日Chrome 70版本发布后，仍未更新赛门铁克新PKI系统签发证书的话，用户继续使用Chrome访问这些站点便会出现证书错误提示：
 
-![img](/img/in-post/post-180912-distrust-of-symantec-pki/WechatIMG2109.png)
+![img](/img/in-post/post-180912-distrust-of-symantec-pki/WechatIMG2227.png)
 
 ### 问题
 
