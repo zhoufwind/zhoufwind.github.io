@@ -1,7 +1,7 @@
 ---
 layout: post
-title: ""
-subtitle: ""
+title: "DNS日志文件创建失败导致BIND服务宕机"
+subtitle: "又踩到一坑！"
 date: 2018-10-15 01:30PM
 catalog: true
 tags:
