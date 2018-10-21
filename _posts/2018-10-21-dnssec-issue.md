@@ -82,14 +82,13 @@ Oct 21 11:02:44 <hostname> named[9853]: error (broken trust chain) resolving 'ww
 
 > It seems you have your named misconfigured. You have "dnssec-lookaside . trust-anchor dlv.isc.org.;" line in your options {} statement but you don't have the dlv.isc.org. DNSKEY in your named.conf. Basically you told named "try to validate all domains via ISC DLV key" but you didn't specify the key. Thus named failed to validate all domains. You can check this with the /usr/bin/dig utility
 
-初步得出结论：原配置文件开启了DNS安全扩展（DNSSEC）参数，非权威DNS不能开启这个配置，否则会造成dns请求为不信任链，最终导致解析失败；该配置从部署qa dns到现在一直是开着的，为啥突然故障暂未查明原因，猜测是请求量达到一定阈值后，被根dns屏蔽造成；
+得出初步结论：原配置文件开启了DNS安全扩展（DNSSEC）参数，非权威DNS不能开启这个配置，否则会造成dns请求为不信任链，最终导致解析失败。
 
 ### 缓解
 
 1. 解决问题优先，重启named服务。确实重启后恢复正常。
 
 2. 为避免相同问题再次发生，修改BIND服务配置，关闭DNSSEC相关配置：
-
 原BIND配置文件：
 ```
         dnssec-enable yes;
@@ -100,7 +99,6 @@ Oct 21 11:02:44 <hostname> named[9853]: error (broken trust chain) resolving 'ww
 
         managed-keys-directory "/var/named/dynamic";
 ```
-
 调整后的BIND配置文件：
 ```
         dnssec-enable no;
