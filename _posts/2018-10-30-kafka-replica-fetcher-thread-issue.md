@@ -98,7 +98,7 @@ java.io.IOException: Connection to 0 was disconnected before the response was re
 
 `Broker 1`及`Broker 2`都在报`java.io.IOException: Connection to 0 was disconnected before the response was read`这个错，而`Broker 0`啥异常都没有，推测出现了类似脑裂的问题，也即：`Broker 1`及`Broker 2`均无法与`Broker 0`通信了，集群间状态出现异常，导致的结果是`Broker 0`不再作为Kafka集群的一个节点，被集群剔除了。
 
-通过报错信息查看了下Kafka源码，出现该异常报错的场景也确实是当Kafka数据节点（`KafkaClient`）失去连接（`wasDisconnected()`）时才会抛的异常，而且正常来说应该是可以获取到建连失败节点的`socket`的，但在日志中，`socket`字段为`0`，说明获取`KafkaClient`的状态（`response.destination()`）同样出现了问题：
+通过报错日志搜了下Kafka源码，出现该异常报错的场景确实是在当Kafka数据节点（`KafkaClient`）失去连接（`wasDisconnected()`）时才会抛的异常，并且正常来说应该是可以获取到建连失败节点的`socket`信息的，但在日志中，`socket`字段为`0`，说明获取`KafkaClient`的状态（`response.destination()`）同样出现了问题：
 
 ```java
     /**
@@ -136,7 +136,7 @@ java.io.IOException: Connection to 0 was disconnected before the response was re
 
 ### 后记
 
-由于急于恢复现场，出现故障时并未对现场做全面的数据分析，事后再查监控数据，发现有几个服务器性能指标异常：
+由于急于恢复服务，出现故障时并未对现场做全面的数据分析，事后再查监控数据，发现有如下几个服务器性能指标异常：
 - 服务器TCP连接数中，`Broker 0`的`close wait`数量自早7点后直线飙升，推测是`Broker 0`故障后，原先与`Broker 0`建连的生产者（logstash shipper）并未超时断开，保留了大量tcp连接等待关闭，但这些连接为什么始终保持，而不是超时断开，zk重新分配给`Broker 1`及`Broker 2`，这里是个疑问。
 - 重启`Broker 0`后，`Broker 0`的`close wait`消失，`established`数量出现上升：
 
