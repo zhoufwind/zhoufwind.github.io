@@ -23,7 +23,7 @@ tags:
 
 #### logstash indexer
 
-由于是某个索引在早7点突然停止索引，推测可能是logstash indexer生成日志异常，故重启对应索引点logstash indexer，但重启后并未恢复，依然无索引。
+由于是某个索引在早7点突然停止索引，推测可能是logstash indexer生成日志异常，故重启对应索引点logstash indexer，但重启后并未恢复，依然无索引，排除logstash的问题。
 
 #### Kafka
 
