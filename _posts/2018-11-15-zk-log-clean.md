@@ -76,11 +76,11 @@ tmpfs            16G   16K   16G   1% /dev/shm
 LOG_DIR=/home/data/zookeeper/version-2/
 TTL=7
 
-if [ -d "$LOG_DIR" ];then
-  find $LOG_DIR -type f -mtime +"$TTL" -name "log.*" | xargs -i rm -f {}
-  find $LOG_DIR -type f -mtime +"$TTL" -name "snapshot.*" | xargs -i rm -f {}
-else
-  echo "Folder: '$LOG_DIR' isn't exist! exit . . ."; exit
+if [ -d "$LOG_DIR" ];then  
+  find $LOG_DIR -type f -mtime +"$TTL" -name "log.*" | xargs -i rm -f {}  
+  find $LOG_DIR -type f -mtime +"$TTL" -name "snapshot.*" | xargs -i rm -f {}  
+else  
+  echo "Folder: '$LOG_DIR' isn't exist! exit . . ."; exit  
 fi
 ```
 
