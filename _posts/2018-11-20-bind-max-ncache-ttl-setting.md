@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "某机房缓存dns解析无响应问题排查"
-subtitle: "域名不存在缓存时间配置"
+title: "某机房缓存dns递归查询无响应问题排查"
+subtitle: "BIND域名不存在缓存时间配置"
 date: 2018-11-20 03:16PM
 catalog: true
 tags:
