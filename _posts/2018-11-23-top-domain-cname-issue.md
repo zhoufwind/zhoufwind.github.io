@@ -14,9 +14,9 @@ tags:
 
 在提具体问题前，我们先讲下什么是：“短链接域名”。
 
-我们知道，在PC端浏览器访问一个网站首页，URL地址栏很简单，敲域名首页就可以了。譬如我司首页是：“https://www.hujiang.com/”，只需要在浏览器中直接输入：“www.hujiang.com”，甚至是：“hujiang.com”就可以了，完全没什么问题。
+我们知道，在PC端浏览器访问一个网站首页，URL地址栏很简单，敲域名首页就可以了。譬如我司首页是：“https://www.hujiang.com/ ”，只需要在浏览器中直接输入：“www.hujiang.com”，甚至是：“hujiang.com”就可以了，完全没什么问题。
 
-当我在沪江网校学习，发现了白金卡这个产品，觉得很赞很实惠，想要安利给你看，这时候我就要把这个产品的URL地址（如：“https://class.hujiang.com/category/12628435324”）粘贴下来，再复制给你，你拿到这个地址后，可以复制、粘贴到浏览器地址栏，也没有什么问题。
+当我在沪江网校学习，发现了白金卡这个产品，觉得很赞很实惠，想要安利给你看，这时候我就要把这个产品的URL地址（如：“https://class.hujiang.com/category/12628435324 ”）粘贴下来，再复制给你，你拿到这个地址后，可以复制、粘贴到浏览器地址栏，也没有什么问题。
 
 但如果我司运营同学想要把这个产品以短信、微信形式推送到你，问题就来了：
 - URL是不是太长了？一样是起到定位地址作用，能不能缩短点呢？
@@ -95,7 +95,7 @@ hj.vc.wswebcdn.com.	60	IN	A	58.220.40.132
 hj.vc.wswebcdn.com.	60	IN	A	58.220.40.16
 
 ;; Query time: 188 msec
-;; SERVER: 192.168.18.244#53(192.168.18.244)
+;; SERVER: <dns_ip>#53(<dns_ip>)
 ;; WHEN: Wed Nov 28 10:32:52 CST 2018
 ;; MSG SIZE  rcvd: 108
 
@@ -117,7 +117,7 @@ pingduodo.com.		60	IN	CNAME	hj.vc.wswebcdn.com.
 wswebcdn.com.		60	IN	SOA	dns1.wswebcdn.org. webmaster.glb0.lxdns.com. 1422577239 10800 3600 604800 60
 
 ;; Query time: 51 msec
-;; SERVER: 192.168.18.245#53(192.168.18.245)
+;; SERVER: <dns_ip>#53(<dns_ip>)
 ;; WHEN: Wed Nov 28 10:33:28 CST 2018
 ;; MSG SIZE  rcvd: 134
 ```
@@ -142,7 +142,7 @@ $ dig pingduodo.com MX
 pingduodo.com.		600	IN	MX	1 mail.pingduodo.com.
 
 ;; Query time: 81 msec
-;; SERVER: 192.168.18.244#53(192.168.18.244)
+;; SERVER: <dns_ip>#53(<dns_ip>)
 ;; WHEN: Wed Nov 28 13:46:34 CST 2018
 ;; MSG SIZE  rcvd: 63
 
@@ -165,7 +165,7 @@ hj.vc.wswebcdn.com.	300	IN	A	150.138.170.21
 hj.vc.wswebcdn.com.	300	IN	A	150.138.107.8
 
 ;; Query time: 121 msec
-;; SERVER: 192.168.18.244#53(192.168.18.244)
+;; SERVER: <dns_ip>#53(<dns_ip>)
 ;; WHEN: Wed Nov 28 13:46:38 CST 2018
 ;; MSG SIZE  rcvd: 103
 ```
