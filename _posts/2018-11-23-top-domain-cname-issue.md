@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "权威域域名能否做CNAME解析？"
+title: "权威域顶级域名能否做CNAME解析？"
 subtitle: "Don't CNAME @, ever."
 date: 2018-11-28 10:40AM
 catalog: true
@@ -186,7 +186,7 @@ CloudXNS同时指出：
 
 另外，[StackExchange][3]上也有类似解释，特别是在权威域上进行该操作：
 
-> Not possible - this would conflict with the SOA- and NS-records at the domain root.
+> Not possible - this would conflict with the SOA- and NS-records at the domain root.  
 > From RFC1912 section 2.4: "A CNAME record is not allowed to coexist with any other data."
 
 > This is implementation specific and dangerous advice. Don't CNAME @, ever. 
