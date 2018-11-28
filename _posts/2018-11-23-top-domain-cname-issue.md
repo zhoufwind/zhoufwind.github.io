@@ -27,7 +27,7 @@ tags:
 
 #### 推广短信
 
-![img](/img/in-post/post-181128-top-domain-cname/WechatIMG2464.png)
+![img](/img/in-post/post-181128-top-domain-cname/WechatIMG2470.jpeg)
 
 #### 点击短链接，转化后效果
 
