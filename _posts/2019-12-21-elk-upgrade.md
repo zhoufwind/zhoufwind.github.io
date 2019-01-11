@@ -2,7 +2,7 @@
 layout: post
 title: "ELK集群升级记录"
 subtitle: "ES1.6升级至6.5.1版本记录"
-date: 2019-01-1 07:42PM
+date: 2019-01-11 07:42PM
 catalog: true
 tags:
     - 运维
