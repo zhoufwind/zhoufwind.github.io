@@ -92,5 +92,8 @@ friends: [
     # },{
         title: "Hux Blog",
         href: "https://huangxuan.me/"
+    },{
+        title: "matoken's meme",
+        href: "https://matoken.org/"
     }
 ]
