@@ -25,7 +25,7 @@ tags:
 尝试通过添加静态路由解决，但发现托管服务区上可以正常添加路由，但是新kafka服务区无法添加返回路由：
 
 ```bash
-[root@nh-v52-151 ~]# ip route add 1.1.56.0/24 via 1.1.50.120
+# ip route add 1.1.56.0/24 via 1.1.50.120
 RTNETLINK answers: Network is unreachable
 ```
 
