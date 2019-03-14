@@ -23,41 +23,44 @@ tags:
 
 ### 编译及运行
 
-1. 下载最新开源程序代码，并进行编译（需安装go编译环境）：
-```bash
-yum install go
+1. 下载最新开源程序代码，并进行编译（需安装go编译环境）：  
 
-cat > /etc/bashrc << EOF
+```bash
+# yum install go
+
+# cat > /etc/bashrc << EOF
 export GOROOT=/usr/local/go
 export GOPATH=/home/soft/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 EOF
 
-mkdir /home/soft/go/src/github.com/childe -p
-cd /home/soft/go/src/github.com/childe
+# mkdir /home/soft/go/src/github.com/childe -p
+# cd /home/soft/go/src/github.com/childe
 
-git clone https://github.com/childe/gohangout.git
-cd gohangout/
-govendor sync
-govendor list
-make
-ln -s /home/soft/go/src/github.com/childe/gohangout/build/gohangout /usr/local/bin/gohangout
+# git clone https://github.com/childe/gohangout.git
+# cd gohangout/
+# govendor sync
+# govendor list
+# make
+# ln -s /home/soft/go/src/github.com/childe/gohangout/build/gohangout /usr/local/bin/gohangout
 ```
 
 2. 直接下载二进制程序并运行（可在没有go环境的服务器上执行该二进制程序）：
 - 在编译好的服务器上：  
+
 ```bash
-vi indexer-kafka-tmp.yml
-gohangout --config indexer-kafka-tmp.yml &
+# vi indexer-kafka-tmp.yml
+# gohangout --config indexer-kafka-tmp.yml &
 ```
 
 - 在其他未编译过的服务器上：  
+
 ```bash
-cd /usr/local/bin
-wget https://github.com/childe/gohangout/releases/download/1.2.3/gohangout-linux-x64-4f3153a
-chmod +x gohangout-linux-x64-4f3153a
-vi indexer-kafka-tmp.yml
-gohangout-linux-x64-4f3153a --config indexer-kafka-tmp.yml &
+# cd /usr/local/bin
+# wget https://github.com/childe/gohangout/releases/download/1.2.3/gohangout-linux-x64-4f3153a
+# chmod +x gohangout-linux-x64-4f3153a
+# vi indexer-kafka-tmp.yml
+# gohangout-linux-x64-4f3153a --config indexer-kafka-tmp.yml &
 ```
 
 ### 压力测试
@@ -133,7 +136,8 @@ cpu吃的比较明显，当索引到21k时，cpu time达到了78.6，几乎是�
 
 #### 关于毫秒
 
-go时间格式只支持`2006-01-02 15:04:05.000`这种格式，如果你的日志时间格式是：`2019-03-04T11:15:16,417`这样的，那必须拆分处理，如下：
+go时间格式只支持`2006-01-02 15:04:05.000`这种格式，如果你的日志时间格式是：`2019-03-04T11:15:16,417`这样的，那必须拆分处理，如下：  
+
 ```
 filters:
     - Grok:
@@ -151,7 +155,8 @@ filters:
 
 #### 关于自加年份
 
-如果你的日志时间格式是：`Feb 28 14:44:20`这样的，那可以如下添加年份，gohangout已经帮你取到今年的年份了：
+如果你的日志时间格式是：`Feb 28 14:44:20`这样的，那可以如下添加年份，gohangout已经帮你取到今年的年份了：  
+
 ```
 - Date:
     src: 'logtime'
@@ -162,7 +167,8 @@ filters:
     remove_fields: ["logtime"]
 ```
 
-引用gohangout源码部分，如下实现：
+引用gohangout源码部分，如下实现：  
+
 ```
 if dp.addYear {
   value = fmt.Sprintf("%d%s", time.Now().Year(), t.(string))
@@ -171,7 +177,8 @@ if dp.addYear {
 
 #### 关于if写法
 
-与logstash的if用法不太一样，可以照下面这么写：
+与logstash的if用法不太一样，可以照下面这么写：  
+
 ```
 - Grok:
         if:
@@ -183,7 +190,8 @@ if dp.addYear {
 
 #### 关于grok正则
 
-正则匹配采集转义字符grok失败，去掉转义符就通过，如日志中包含\n，grok都会失败，解法参照go的正则语法，前面加 (?ms)，如下：
+正则匹配采集转义字符grok失败，去掉转义符就通过，如日志中包含\n，grok都会失败，解法参照go的正则语法，前面加 (?ms)，如下：  
+
 ```
 (?ms)(?P<message>.*)
 ```
@@ -205,7 +213,8 @@ if dp.addYear {
 
 #### 索引到先前logstash传输的索引数据出现兼容性问题？
 
-如果启动gohangout报如下错：
+如果启动gohangout报如下错：  
+
 ```
 I0314 10:23:27.736730   21658 elasticsearch_output.go:141] error :map[reason:Rejecting mapping update to [logstash-xxx-2019.03.14] as the final mapping would have more than 1 type: [doc, logs] type:illegal_argument_exception]
 ```
