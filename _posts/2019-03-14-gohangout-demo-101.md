@@ -24,7 +24,7 @@ tags:
 ### 编译及运行
 
 1. 下载最新开源程序代码，并进行编译（需安装go编译环境）：
-```
+```bash
 # yum install go
 
 # cat > /etc/bashrc << EOF
@@ -45,7 +45,7 @@ EOF
 ```
 
 2. 直接下载二进制程序并运行（可在没有go环境的服务器上执行该二进制程序）：
-```
+```bash
 # 在编译好的服务器上：
 # vi indexer-kafka-tmp.yml
 # gohangout --config indexer-kafka-tmp.yml &
