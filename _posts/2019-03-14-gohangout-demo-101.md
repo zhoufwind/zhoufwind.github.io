@@ -25,37 +25,39 @@ tags:
 
 1. 下载最新开源程序代码，并进行编译（需安装go编译环境）：
 ```bash
-# yum install go
+yum install go
 
-# cat > /etc/bashrc << EOF
+cat > /etc/bashrc << EOF
 export GOROOT=/usr/local/go
 export GOPATH=/home/soft/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 EOF
 
-# mkdir /home/soft/go/src/github.com/childe -p
-# cd /home/soft/go/src/github.com/childe
+mkdir /home/soft/go/src/github.com/childe -p
+cd /home/soft/go/src/github.com/childe
 
-# git clone https://github.com/childe/gohangout.git
-# cd gohangout/
-# govendor sync
-# govendor list
-# make
-# ln -s /home/soft/go/src/github.com/childe/gohangout/build/gohangout /usr/local/bin/gohangout
+git clone https://github.com/childe/gohangout.git
+cd gohangout/
+govendor sync
+govendor list
+make
+ln -s /home/soft/go/src/github.com/childe/gohangout/build/gohangout /usr/local/bin/gohangout
 ```
 
 2. 直接下载二进制程序并运行（可在没有go环境的服务器上执行该二进制程序）：
+- 在编译好的服务器上：  
 ```bash
-# 在编译好的服务器上：
-# vi indexer-kafka-tmp.yml
-# gohangout --config indexer-kafka-tmp.yml &
+vi indexer-kafka-tmp.yml
+gohangout --config indexer-kafka-tmp.yml &
+```
 
-# 在其他未编译过的服务器上：
-# cd /usr/local/bin
-# wget https://github.com/childe/gohangout/releases/download/1.2.3/gohangout-linux-x64-4f3153a
-# chmod +x gohangout-linux-x64-4f3153a
-# vi indexer-kafka-tmp.yml
-# gohangout-linux-x64-4f3153a --config indexer-kafka-tmp.yml &
+- 在其他未编译过的服务器上：  
+```bash
+cd /usr/local/bin
+wget https://github.com/childe/gohangout/releases/download/1.2.3/gohangout-linux-x64-4f3153a
+chmod +x gohangout-linux-x64-4f3153a
+vi indexer-kafka-tmp.yml
+gohangout-linux-x64-4f3153a --config indexer-kafka-tmp.yml &
 ```
 
 ### 压力测试
