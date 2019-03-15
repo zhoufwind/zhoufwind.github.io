@@ -23,7 +23,7 @@ tags:
 
 ### 编译及运行
 
-1. 下载最新程序代码，并进行编译（需安装go编译环境）：  
+- 下载最新程序代码，并进行编译（需安装go编译环境）并执行：  
 
 ```bash
 # yum install go
@@ -43,17 +43,12 @@ EOF
 # govendor list
 # make
 # ln -s /home/soft/go/src/github.com/childe/gohangout/build/gohangout /usr/local/bin/gohangout
-```
-
-2. 直接下载二进制程序并运行（可在没有go环境的服务器上执行该二进制程序）：
-- 在编译好的服务器上：  
-
-```bash
 # vi indexer-kafka-tmp.yml
 # gohangout --config indexer-kafka-tmp.yml &
 ```
 
-- 在其他未编译过的服务器上：  
+- 下载二进制程序并运行（可在没有go环境的服务器上执行）：
+
 ```bash
 # cd /usr/local/bin
 # wget https://github.com/childe/gohangout/releases/download/1.2.3/gohangout-linux-x64-4f3153a
