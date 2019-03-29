@@ -239,5 +239,5 @@ java.lang.OutOfMemoryError: Java heap space
 通过进程查看kafka jvm参数，`-Xmx1G -Xms1G`实在太小，调整配置后恢复。
 
 ```
-export KAFKA_HEAP_OPTS="-Xmx1G -Xms1G"
+export KAFKA_HEAP_OPTS="-Xmx10G -Xms10G"
 ```
