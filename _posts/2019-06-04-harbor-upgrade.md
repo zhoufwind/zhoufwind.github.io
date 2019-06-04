@@ -142,11 +142,11 @@ wget ftp://xxx:xxx@x.x.x.x/cert/_.yeshj.com.key -P /usr/local/src/harbor/cert/
 [Harbor upgrade and migration guide(v1.8.0)](https://github.com/goharbor/harbor/blob/release-1.8.0/docs/migration_guide.md)
 
 ### 资源下载
-- harbor-offline-installer-v1.5.4.tgz  
+- harbor-offline-installer-v1.5.4.tgz (md5: 61e8febfca5cd4e957e102b6e2fe42c0)  
 链接: https://pan.baidu.com/s/16NVxp0Bu8o4Px0lGEGkVtA 提取码: qgx4
 
-- harbor-offline-installer-v1.6.0.tgz  
+- harbor-offline-installer-v1.6.0.tgz (md5: d68d85d164020b445bcf479d17d53873)  
 链接: https://pan.baidu.com/s/1ZGqeE3oYQ3eSnoHeGBYyzw 提取码: 6w5t
 
-- harbor-offline-installer-v1.8.0.tgz  
+- harbor-offline-installer-v1.8.0.tgz (md5: f299bcfcd83bd421403113ab654890a9)  
 链接: https://pan.baidu.com/s/1vbx1aNaChKbnORu4_8jJ4Q 提取码: nwr4
