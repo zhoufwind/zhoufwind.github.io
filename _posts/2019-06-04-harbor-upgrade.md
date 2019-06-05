@@ -53,7 +53,7 @@ mkdir harbor.migrate.v1.5.4
 docker run -it --rm -e DB_USR=root -e DB_PWD=root123 -v /data/database:/var/lib/mysql -v /usr/local/src/harbor.bak.v1.5.4/harbor.cfg:/harbor-migration/harbor-cfg/harbor.cfg -v /usr/local/src/harbor.migrate.v1.5.4:/harbor-migration/backup goharbor/harbor-migrator:v1.5.0 backup
 ```
 
-6. 升级数据库（database schema）、harbor配置文件（harbor.cfg），并且迁移数据：  
+6. 升级数据库，修改harbor配置文件，迁移数据：  
 ```
 docker run -it --rm -e DB_USR=root -e DB_PWD=root123 -v /data/database:/var/lib/mysql -v /usr/local/src/harbor.bak.v1.5.4/harbor.cfg:/harbor-migration/harbor-cfg/harbor.cfg goharbor/harbor-migrator:v1.6.0 up
 
