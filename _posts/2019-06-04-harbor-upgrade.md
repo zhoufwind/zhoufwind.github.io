@@ -56,10 +56,8 @@ docker run -it --rm -e DB_USR=root -e DB_PWD=root123 -v /data/database:/var/lib/
 6. 升级数据库，修改harbor配置文件，迁移数据：  
 ```
 docker run -it --rm -e DB_USR=root -e DB_PWD=root123 -v /data/database:/var/lib/mysql -v /usr/local/src/harbor.bak.v1.5.4/harbor.cfg:/harbor-migration/harbor-cfg/harbor.cfg goharbor/harbor-migrator:v1.6.0 up
-
 mkdir /data/notary-db/
 docker run -it --rm -e DB_USR=root -v /data/notary-db/:/var/lib/mysql -v /data/database:/var/lib/postgresql/data goharbor/harbor-migrator:v1.6.0 --db up
-
 mkdir /data/clair-db/
 docker run -it --rm -v /data/clair-db/:/clair-db -v /data/database:/var/lib/postgresql/data goharbor/harbor-migrator:v1.6.0 --db up
 ```
