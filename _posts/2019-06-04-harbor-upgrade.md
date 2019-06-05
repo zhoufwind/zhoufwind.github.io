@@ -21,37 +21,43 @@ tags:
 
 迁移步骤：
 
-1. 关闭harbor服务  
+1. 关闭harbor服务
+
 ```
 cd /usr/local/src/harbor
 docker-compose down
 ```
 
-2. 备份harbor程序以及数据库文件  
+2. 备份harbor程序以及数据库文件
+
 ```
 cd ..
 mv harbor harbor.bak.v1.5.4
 cp -rf /data/database /data/database.bak.v1.5.4
 ```
 
-3. 下载harbor v1.6.0  
+3. 下载harbor v1.6.0
+
 ```
 wget https://storage.googleapis.com/harbor-releases/release-1.6.0/harbor-offline-installer-v1.6.0.tgz
 tar zxf harbor-offline-installer-v1.6.0.tgz
 ```
 
-4. 下载harbor迁移工具  
+4. 下载harbor迁移工具
+
 ```
 docker pull goharbor/harbor-migrator:v1.6.0
 ```
 
-5. 创建harbor配置文件备份文件夹，并且进行备份操作  
+5. 创建harbor配置文件备份文件夹，并且进行备份操作
+
 ```
 mkdir harbor.migrate.v1.5.4
 docker run -it --rm -e DB_USR=root -e DB_PWD=root123 -v /data/database:/var/lib/mysql -v /usr/local/src/harbor.bak.v1.5.4/harbor.cfg:/harbor-migration/harbor-cfg/harbor.cfg -v /usr/local/src/harbor.migrate.v1.5.4:/harbor-migration/backup goharbor/harbor-migrator:v1.5.0 backup
 ```
 
-6. 升级数据库（database schema）、harbor配置文件（harbor.cfg），并且迁移数据  
+6. 升级数据库（database schema）、harbor配置文件（harbor.cfg），并且迁移数据
+
 ```
 docker run -it --rm -e DB_USR=root -e DB_PWD=root123 -v /data/database:/var/lib/mysql -v /usr/local/src/harbor.bak.v1.5.4/harbor.cfg:/harbor-migration/harbor-cfg/harbor.cfg goharbor/harbor-migrator:v1.6.0 up
 
@@ -62,7 +68,8 @@ mkdir /data/clair-db/
 docker run -it --rm -v /data/clair-db/:/clair-db -v /data/database:/var/lib/postgresql/data goharbor/harbor-migrator:v1.6.0 --db up
 ```
 
-7. 创建harbor配置文件（harbor.cfg），部署harbor应用，启动harbor  
+7. 创建harbor配置文件（harbor.cfg），部署harbor应用，启动harbor
+
 ```
 cd harbor
 cp harbor.cfg harbor.cfg.src
@@ -79,38 +86,44 @@ wget ftp://xxx:xxx@x.x.x.x/cert/_.yeshj.com.key -P /usr/local/src/harbor/cert/
 
 迁移步骤：
 
-1. 关闭harbor服务  
+1. 关闭harbor服务
+
 ```
 cd /usr/local/src/harbor
 docker-compose down
 ```
 
-2. 备份harbor程序以及数据库文件  
+2. 备份harbor程序以及数据库文件
+
 ```
 cd ..
 mv harbor harbor.bak.v1.6.0
 cp -rf /data/database /data/database.bak.v1.6.0
 ```
 
-3. 下载harbor v1.8.0  
+3. 下载harbor v1.8.0
+
 ```
 wget https://storage.googleapis.com/harbor-releases/release-1.8.0/harbor-offline-installer-v1.8.0.tgz
 tar zxf harbor-offline-installer-v1.8.0.tgz
 ```
 
-4. 下载harbor迁移工具  
+4. 下载harbor迁移工具
+
 ```
 docker pull goharbor/harbor-migrator:v1.8.0
 ```
 
-5. 升级harbor配置文件，也即`harbor.cfg`到`harbor.yml`  
+5. 升级harbor配置文件，也即`harbor.cfg`到`harbor.yml`
+
 ```
 cd harbor
 cp harbor.yml harbor.yml.src
 docker run -it --rm -v /usr/local/src/harbor.bak.v1.6.0/harbor.cfg:/harbor-migration/harbor-cfg/harbor.cfg -v /usr/local/src/harbor/harbor.yml:/harbor-migration/harbor-cfg-out/harbor.yml goharbor/harbor-migrator:v1.8.0 --cfg up
 ```
 
-6. 部署harbor应用，启动harbor  
+6. 部署harbor应用，启动harbor
+
 ```
 mkdir cert
 wget ftp://xxx:xxx@x.x.x.x/cert/_.yeshj.com.crt -P /usr/local/src/harbor/cert/
