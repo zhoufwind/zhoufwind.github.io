@@ -95,5 +95,17 @@ friends: [
     },{
         title: "matoken's meme",
         href: "https://matoken.org/blog/"
+    },{
+        title: "shida's blog",
+        href: "https://blog.csdn.net/shida_csdn"
+    },{
+        title: "峰云就她了",
+        href: "http://xiaorui.cc/"
+    },{
+        title: "郭俊 Jason",
+        href: "http://www.jasongj.com/"
+    },{
+        title: "派猴子来的救兵",
+        href: "http://ohmycat.me/"
     }
 ]
