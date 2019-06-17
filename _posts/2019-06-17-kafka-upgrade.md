@@ -10,9 +10,9 @@ tags:
 
 ### 背景
 
-从1.1.x升级到2.2.x，跨越了1个大版本，主要提升了SSL、安全验证、内存使用优化、程序健壮性、新版本java支持、API改进等功能。
+从`1.1.x`升级到`2.2.x`，跨越了1个大版本，主要提升了SSL、安全验证、内存使用优化、程序健壮性、新版本java支持、API改进等功能。
 
-升级步骤按照官方文档即可，值得注意的是，从1.1.x升级至2.2.x，无需指定消息格式配置，也即：`log.message.format.version`这项，只有低于`0.11.0.x`版本才需单独制定。
+升级步骤按照官方文档即可，值得注意的是，从`1.1.x`升级至`2.2.x`，无需指定消息格式配置，也即：`log.message.format.version`这项，只有低于`0.11.0.x`版本才需单独制定。
 
 ### 升级步骤
 
@@ -26,5 +26,5 @@ tags:
 
 ### 参考文档
 
-[Apache Kafka Download](https://kafka.apache.org/downloads)
+[Apache Kafka Download](https://kafka.apache.org/downloads)  
 [Apache Kafka Document - upgrade 2.2.0](https://kafka.apache.org/documentation/#upgrade_2_2_0)
