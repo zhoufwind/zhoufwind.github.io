@@ -13,7 +13,7 @@ tags:
 
 某机房kafka集群因其中一台节点服务器意外宕机，导致其中一个`broker`不可用，而`gohangout`在该情况下进程崩溃，无法继续消费，es索引出现延迟。
 
-![kafka集群中某broker宕机后gohangout panic](https://github.com/childe/gohangout/issues/41)
+该问题记录在：[kafka集群中某broker宕机后gohangout panic](https://github.com/childe/gohangout/issues/41)
 
 ### 问题
 
@@ -60,7 +60,7 @@ Topic:iis	PartitionCount:3	ReplicationFactor:1	Configs:
 }
 ```
 
-原本到这边，增加副本的操作就结束了，但由于粗心，这边再配置p0的replica时写错了broker号，把0写成了3，发现后尝试修改，但发现怎么改也改不回去了...
+原本到这边，执行`execute`命令后增加副本的操作就结束了，但由于粗心，这边再配置p0的replica时写错了broker id，把`0`写成了`3`，发现后尝试修改，但发现怎么改也改不回去了...
 
 ```
 # ./bin/kafka-reassign-partitions.sh --zookeeper zk1-base.xxxj.com:2181,zk2-base.xxxj.com:2181,zk3-base.xxxj.com:2181,zk4-base.xxxj.com:2181,zk5-base.xxxj.com:2181 --reassignment-json-file replication-iis.json --execute
@@ -167,8 +167,8 @@ Topic:iis	PartitionCount:3	ReplicationFactor:2	Configs:
 	Topic: iis	Partition: 2	Leader: none	Replicas: 1,2	Isr: 
 ```
 
-这时发现我的iis分片数据用的不是这个kafka集群，而是用的其他机器，所以再怎么改新数据也不会进来。
+这时突然发现我的iis分片数据用的不是这个kafka集群，而是用的其他kafka集群，所以再怎么改新数据也不会进来。
 
-好在这样也没影响线上，下次操作还是要细心点。
+好在折腾了一番没影响线上，下次操作还是要细心。
 
-至于增加了副本后，broker再次宕机gohangout是否能够稳定运行，待测试后再做分析。
+至于增加了副本后，broker宕机gohangout是否能够稳定运行，待测试后再做分析。
