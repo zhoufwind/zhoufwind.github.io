@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "kafka副本添加（笔记）"
+title: "kafka副本扩容（笔记）"
 date: 2019-07-01 05:37PM
 catalog: true
 tags:
@@ -173,9 +173,43 @@ Topic:iis	PartitionCount:3	ReplicationFactor:2	Configs:
 
 至于增加了副本后，broker宕机gohangout是否能够稳定运行，待测试后再做分析。
 
+### 补充
+
+#### 格式问题
+
+由于json文件内容是拷贝的，最后一个partition的结尾多了个逗号，提示以下报错：
+
+```
+Partitions reassignment failed due to Partition reassignment data file is empty
+kafka.common.AdminCommandFailedException: Partition reassignment data file is empty
+	at kafka.admin.ReassignPartitionsCommand$.parseAndValidate(ReassignPartitionsCommand.scala:183)
+	at kafka.admin.ReassignPartitionsCommand$.executeAssignment(ReassignPartitionsCommand.scala:153)
+	at kafka.admin.ReassignPartitionsCommand$.executeAssignment(ReassignPartitionsCommand.scala:149)
+	at kafka.admin.ReassignPartitionsCommand$.main(ReassignPartitionsCommand.scala:46)
+	at kafka.admin.ReassignPartitionsCommand.main(ReassignPartitionsCommand.scala)
+```
+
+把最后的逗号去掉后，扩容执行成功。
+
+```
+...
+        },
+        {
+            "topic": "log4j_v1",
+            "partition": 17,
+            "replicas": [
+                1,
+                2
+            ]
+        }   <-- 删除这里多余的逗号
+    ]
+}
+```
+
 ### 参考文档
 
 - [增加Kafka Topic的分区复本数(0.8.2.1)](http://blog.cheyo.net/272.html)
 - [kafka topic增加replica报错解决](https://blog.csdn.net/huanggang028/article/details/49445569)
 - [玩转zookeeper命令](https://www.cnblogs.com/sunsky303/p/8631432.html)
 - [kafka how to delete topic with no leader](https://stackoverflow.com/questions/38139445/kafka-how-to-delete-topic-with-no-leader)
+- [Kafka集群扩容遇到的问题](https://blog.51cto.com/jingfeng/1876505)
