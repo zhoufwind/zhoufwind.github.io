@@ -172,3 +172,10 @@ Topic:iis	PartitionCount:3	ReplicationFactor:2	Configs:
 好在折腾了一番没影响线上，下次操作还是要细心。
 
 至于增加了副本后，broker宕机gohangout是否能够稳定运行，待测试后再做分析。
+
+### 参考文档
+
+- [增加Kafka Topic的分区复本数(0.8.2.1)](http://blog.cheyo.net/272.html)
+- [kafka topic增加replica报错解决](https://blog.csdn.net/huanggang028/article/details/49445569)
+- [玩转zookeeper命令](https://www.cnblogs.com/sunsky303/p/8631432.html)
+- [kafka how to delete topic with no leader](https://stackoverflow.com/questions/38139445/kafka-how-to-delete-topic-with-no-leader)
