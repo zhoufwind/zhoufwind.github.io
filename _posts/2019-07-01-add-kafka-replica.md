@@ -206,6 +206,202 @@ kafka.common.AdminCommandFailedException: Partition reassignment data file is em
 }
 ```
 
+#### 执行log4j_v1副本扩容操作
+
+扩容前parition及replicas的状态：
+
+```
+Topic:log4j_v1	PartitionCount:18	ReplicationFactor:1	Configs:
+	Topic: log4j_v1	Partition: 0	Leader: 2	Replicas: 2	Isr: 2
+	Topic: log4j_v1	Partition: 1	Leader: 0	Replicas: 0	Isr: 0
+	Topic: log4j_v1	Partition: 2	Leader: 1	Replicas: 1	Isr: 1
+	Topic: log4j_v1	Partition: 3	Leader: 1	Replicas: 1	Isr: 1
+	Topic: log4j_v1	Partition: 4	Leader: 2	Replicas: 2	Isr: 2
+	Topic: log4j_v1	Partition: 5	Leader: 0	Replicas: 0	Isr: 0
+	Topic: log4j_v1	Partition: 6	Leader: 1	Replicas: 1	Isr: 1
+	Topic: log4j_v1	Partition: 7	Leader: 2	Replicas: 2	Isr: 2
+	Topic: log4j_v1	Partition: 8	Leader: 0	Replicas: 0	Isr: 0
+	Topic: log4j_v1	Partition: 9	Leader: 2	Replicas: 2	Isr: 2
+	Topic: log4j_v1	Partition: 10	Leader: 0	Replicas: 0	Isr: 0
+	Topic: log4j_v1	Partition: 11	Leader: 1	Replicas: 1	Isr: 1
+	Topic: log4j_v1	Partition: 12	Leader: 2	Replicas: 2	Isr: 2
+	Topic: log4j_v1	Partition: 13	Leader: 0	Replicas: 0	Isr: 0
+	Topic: log4j_v1	Partition: 14	Leader: 1	Replicas: 1	Isr: 1
+	Topic: log4j_v1	Partition: 15	Leader: 2	Replicas: 2	Isr: 2
+	Topic: log4j_v1	Partition: 16	Leader: 0	Replicas: 0	Isr: 0
+	Topic: log4j_v1	Partition: 17	Leader: 1	Replicas: 1	Isr: 1
+```
+
+扩容后：
+
+```
+Topic:log4j_v1	PartitionCount:18	ReplicationFactor:2	Configs:
+	Topic: log4j_v1	Partition: 0	Leader: 2	Replicas: 2,0	Isr: 2,0
+	Topic: log4j_v1	Partition: 1	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 4	Leader: 2	Replicas: 2,0	Isr: 2,0
+	Topic: log4j_v1	Partition: 5	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 6	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 7	Leader: 2	Replicas: 2,0	Isr: 2,0
+	Topic: log4j_v1	Partition: 8	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 9	Leader: 2	Replicas: 2,0	Isr: 2,0
+	Topic: log4j_v1	Partition: 10	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 11	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 12	Leader: 2	Replicas: 2,0	Isr: 2,0
+	Topic: log4j_v1	Partition: 13	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 14	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 15	Leader: 2	Replicas: 2,0	Isr: 2,0
+	Topic: log4j_v1	Partition: 16	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 17	Leader: 1	Replicas: 1,2	Isr: 1,2
+```
+
+#### 副本扩容后的高可用验证
+
+在扩容完毕后，我们模拟一个broker宕机，验证kafka集群服务的高可用，手工kill broker 2的kafka进程，之后的分片及副本状态如下，broker 2脱离Isr(In-sync replica)配置，也即代表broker 2不可用：
+
+```
+Topic:log4j_v1	PartitionCount:18	ReplicationFactor:2	Configs:
+	Topic: log4j_v1	Partition: 0	Leader: 0	Replicas: 2,0	Isr: 0
+	Topic: log4j_v1	Partition: 1	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: log4j_v1	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: log4j_v1	Partition: 4	Leader: 0	Replicas: 2,0	Isr: 0
+	Topic: log4j_v1	Partition: 5	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 6	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: log4j_v1	Partition: 7	Leader: 0	Replicas: 2,0	Isr: 0
+	Topic: log4j_v1	Partition: 8	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 9	Leader: 0	Replicas: 2,0	Isr: 0
+	Topic: log4j_v1	Partition: 10	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 11	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: log4j_v1	Partition: 12	Leader: 0	Replicas: 2,0	Isr: 0
+	Topic: log4j_v1	Partition: 13	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 14	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: log4j_v1	Partition: 15	Leader: 0	Replicas: 2,0	Isr: 0
+	Topic: log4j_v1	Partition: 16	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 17	Leader: 1	Replicas: 1,2	Isr: 1
+```
+
+我们同时升级了gohangout程序版本至最新版，这次模拟宕机操作并未重现当时整个es索引都受影响的现象，一切正常。
+
+确认没问题后，我们重新启动了broker 2的kafka进程，此时分片及副本的状态如下，broker 2加回到Isr中，但作为备用节点，消费端消费数据不会再向broker 2拉取：
+
+```
+Topic:log4j_v1	PartitionCount:18	ReplicationFactor:2	Configs:
+	Topic: log4j_v1	Partition: 0	Leader: 0	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 1	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 4	Leader: 0	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 5	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 6	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 7	Leader: 0	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 8	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 9	Leader: 0	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 10	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 11	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 12	Leader: 0	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 13	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 14	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 15	Leader: 0	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 16	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 17	Leader: 1	Replicas: 1,2	Isr: 1,2
+```
+
+#### 均衡分配
+
+由于在宕机后，集群出现负载不均的问题，这边需要需要单独介入，均衡各分片所在broker，达到均衡负载的目的：
+
+```
+# ./bin/kafka-preferred-replica-election.sh --zookeeper zk1-base.intra.yeshj.com:2181,zk2-base.intra.yeshj.com:2181,zk3-base.intra.yeshj.com:2181,zk4-base.intra.yeshj.com:2181,zk5-base.intra.yeshj.com:2181
+Created preferred replica election path with 
+{
+	"version": 1,
+	"partitions": [{
+		"topic": "log4j_v1",
+		"partition": 1
+	}, {
+		"topic": "log4j_v1",
+		"partition": 6
+	}, {
+		"topic": "log4j_v1",
+		"partition": 11
+	}, {
+		"topic": "log4j_v1",
+		"partition": 16
+	}, {
+		"topic": "log4j_v1",
+		"partition": 9
+	}, {
+		"topic": "log4j_v1",
+		"partition": 0
+	}, {
+		"topic": "log4j_v1",
+		"partition": 10
+	}, {
+		"topic": "log4j_v1",
+		"partition": 12
+	}, {
+		"topic": "log4j_v1",
+		"partition": 7
+	}, {
+		"topic": "log4j_v1",
+		"partition": 4
+	}, {
+		"topic": "log4j_v1",
+		"partition": 8
+	}, {
+		"topic": "log4j_v1",
+		"partition": 13
+	}, {
+		"topic": "log4j_v1",
+		"partition": 15
+	}, {
+		"topic": "log4j_v1",
+		"partition": 3
+	}, {
+		"topic": "log4j_v1",
+		"partition": 2
+	}, {
+		"topic": "log4j_v1",
+		"partition": 14
+	}, {
+		"topic": "log4j_v1",
+		"partition": 17
+	}, {
+		"topic": "log4j_v1",
+		"partition": 5
+	}, ...]
+}
+Successfully started preferred replica election for partitions Set([log4j_v1,5], [log4j_v1,10], [log4j_v1,2], [log4j_v1,14], [log4j_v1,13], [log4j_v1,0], [log4j_v1,15], [log4j_v1,4], [log4j_v1,12], [log4j_v1,17], [log4j_v1,11], [log4j_v1,9], [log4j_v1,1], [log4j_v1,3], [log4j_v1,6], [log4j_v1,8], [log4j_v1,7], [log4j_v1,16], ...)
+```
+
+操作完毕后，分片及副本状态如下：
+
+```
+Topic:log4j_v1	PartitionCount:18	ReplicationFactor:2	Configs:
+	Topic: log4j_v1	Partition: 0	Leader: 2	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 1	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 4	Leader: 2	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 5	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 6	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 7	Leader: 2	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 8	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 9	Leader: 2	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 10	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 11	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 12	Leader: 2	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 13	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 14	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: log4j_v1	Partition: 15	Leader: 2	Replicas: 2,0	Isr: 0,2
+	Topic: log4j_v1	Partition: 16	Leader: 0	Replicas: 0,1	Isr: 0,1
+	Topic: log4j_v1	Partition: 17	Leader: 1	Replicas: 1,2	Isr: 1,2
+```
+
+完成负载均衡。
+
 ### 参考文档
 
 - [增加Kafka Topic的分区复本数(0.8.2.1)](http://blog.cheyo.net/272.html)
@@ -213,3 +409,4 @@ kafka.common.AdminCommandFailedException: Partition reassignment data file is em
 - [玩转zookeeper命令](https://www.cnblogs.com/sunsky303/p/8631432.html)
 - [kafka how to delete topic with no leader](https://stackoverflow.com/questions/38139445/kafka-how-to-delete-topic-with-no-leader)
 - [Kafka集群扩容遇到的问题](https://blog.51cto.com/jingfeng/1876505)
+- [如何在Kafka中对Topic的leader进行均衡](https://blog.csdn.net/lizhitao/article/details/41441513)
