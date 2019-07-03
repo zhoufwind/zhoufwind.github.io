@@ -313,7 +313,7 @@ Topic:log4j_v1	PartitionCount:18	ReplicationFactor:2	Configs:
 由于在宕机后，集群出现负载不均的问题，这边需要需要单独介入，均衡各分片所在broker，达到均衡负载的目的：
 
 ```
-# ./bin/kafka-preferred-replica-election.sh --zookeeper zk1-base.intra.yeshj.com:2181,zk2-base.intra.yeshj.com:2181,zk3-base.intra.yeshj.com:2181,zk4-base.intra.yeshj.com:2181,zk5-base.intra.yeshj.com:2181
+# ./bin/kafka-preferred-replica-election.sh --zookeeper zk1-base.xxxj.com:2181,zk2-base.xxxj.com:2181,zk3-base.xxxj.com:2181,zk4-base.xxxj.com:2181,zk5-base.xxxj.com:2181
 Created preferred replica election path with 
 {
 	"version": 1,
