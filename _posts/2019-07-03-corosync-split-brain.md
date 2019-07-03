@@ -82,6 +82,24 @@ Full list of resources:
 
 查看crm配置，发现多处配置通过域名方式调用服务器，但ping域名后解析出来的ip地址与实际服务器ip地址不符，修改`hosts`文件，指定域名到服务器ip地址，并重启corosync+pacemaker后问题得到缓解。
 
+```
+# ping pr-v17-122.hjidc.com
+PING pk.22.cn (47.52.135.116) 56(84) bytes of data.
+64 bytes from 47.52.135.116: icmp_seq=1 ttl=47 time=32.2 ms
+
+# vi /etc/hosts
+...
+192.168.17.122  pr-v17-122      pr-v17-122.hjidc.com
+192.168.17.128  pr-v17-128      pr-v17-128.hjidc.com
+
+# /etc/init.d/pacemaker stop
+# /etc/init.d/corosync stop
+# /etc/init.d/corosync start
+# /etc/init.d/pacemaker start
+```
+
+恢复后2各节点的crm及网卡ip状态信息：
+
 - NodeA
 
 ```
