@@ -110,5 +110,8 @@ friends: [
     },{
         title: "宋净超的博客",
         href: "https://jimmysong.io/"
+    },{
+        title: "周曦的博客",
+        href: "http://zhouxi.io/blog/zhouxi"
     }
 ]
