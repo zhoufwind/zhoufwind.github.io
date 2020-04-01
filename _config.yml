@@ -113,5 +113,8 @@ friends: [
     },{
         title: "周曦的博客",
         href: "http://zhouxi.io/blog/zhouxi"
+    },{
+        title: "赟哥的笔记",
+        href: "https://yunzhao.gitbook.io/notes"
     }
 ]
