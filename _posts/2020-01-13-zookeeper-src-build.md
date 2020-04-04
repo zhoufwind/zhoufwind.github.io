@@ -155,7 +155,8 @@ org.apache.zookeeper.ZooKeeperMain
 2. 重新生成新target文件：  
 ![img](/img/in-post/post-200113-zk-src-build/WechatIMG10.png)
 
-3. 获取最新Info类：  
+3. 获取最新Info类，生成路径为：zookeeper-server/target/generated-sources/java/org/apache/zookeeper/version/Info.java  
+
 ```java
 package org.apache.zookeeper.version;
 
@@ -168,6 +169,8 @@ public interface Info {
     String BUILD_DATE="04/04/2020 14:30 GMT";
 }
 ```
+
+如果之前手工创建了Info日志，IDE则会提示`Info`文件重复，需要把之前手工创建的删除。
 
 #### Console又不显示日志了
 
