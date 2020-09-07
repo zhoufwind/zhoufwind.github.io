@@ -12,7 +12,7 @@ tags:
 
 ## 下载源码
 
-Github下载es源码[link](https://github.com/elastic/elasticsearch)：
+Github下载es源码，地址：[link](https://github.com/elastic/elasticsearch)：
 下载后checkout到5.6分支。
 
 ## 编译、打包、运行
@@ -39,7 +39,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)
 
 ### gradle版本降级：
 
-参照官网升级文档：[Gradle | Installation | Installing manually](https://gradle.org/install/#manually)
+参照官网升级文档：[Gradle - Installation - Installing manually](https://gradle.org/install/#manually)，Gradle下载地址：[link](https://gradle.org/releases/)。
 
 ```bash
 sudo mkdir /opt/gradle
@@ -88,6 +88,7 @@ BUILD SUCCESSFUL in 5m 8s
 488 actionable tasks: 488 executed
 ```
 
+
 2. 生成IDEA项目文件
 
 ```bash
@@ -111,6 +112,7 @@ $ cd elasticsearch-5.6.17-SNAPSHOT
 $ cp -r config modules plugins /Users/zhoufeng12/es
 ```
 
+
 2. 手工写入elasticsearch.policy配置：
 
 ```bash
@@ -126,6 +128,7 @@ grant {
 1. gradle配置页：
 
 ![img](/img/in-post/post-200907-es-src-build/71599488841_.pic_hd.jpg)
+
 
 2. Run/Debug配置：
 
